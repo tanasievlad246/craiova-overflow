@@ -10,8 +10,7 @@
     				<input type="password" class="form-control" id="exampleInputPassword1" placeholder="password" required>
   				</div>
   				<button type="submit" class="btn btn-primary ml-2">Login</button>
-			</form>
-			
+			</form>		
 			<div class="float-left">
 				<form action="" class="float-left">
 			 		<input type="submit" name="Register" value="Register" class="btn btn-outline-success" href="register.php" />

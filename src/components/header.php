@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +8,7 @@
 	<link rel="stylesheet" href="./public/static/css/reset.css">
 	<title>Craiova Overflow</title>
 </head>
+
 <body>
 	<div class="container-fluid">
-		<?php include './src/components/nav.php'; ?>
+		<?php include 'nav.php'; ?>

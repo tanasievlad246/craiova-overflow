@@ -1,0 +1,11 @@
+textarea {
+  resize: none;
+}
+
+.post-form form {
+  padding: 30px;
+}
+
+body {
+  background-color: lightgray;
+}

@@ -3,7 +3,7 @@ if (isset($_POST['submit'])) {
     $host = '127.0.0.1';
     $port = '3306';
     $username = 'root';
-    $password = 'fortuna246';
+    $password = '';
     $dbName = 'craiovaOverflow';
 
     $conn = new mysqli($host, $username, $password, $dbName);

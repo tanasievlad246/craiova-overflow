@@ -2,7 +2,7 @@
 $servername = 'localhost';
 $port = '3306';
 $username = 'root';
-$password = 'fortuna246';
+$password = '';
 $dbName = 'craiovaOverflow';
 
 $conn = new mysqli($servername, $username, $password, $dbName);

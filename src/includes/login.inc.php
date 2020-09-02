@@ -37,7 +37,7 @@ if (isset($_POST['login'])) {
                 $_SESSION['user_id'] = $row['user_id'];
                 $_SESSION['email'] = $row['email'];
                 $_SESSION['username'] = $row['username'];
-                $_SESSION['date_joined'] = $row['date_joined'];
+                $_SESSION['joined'] = $row['joined'];
 
                 header('Location: http://localhost/craiova-overflow/index.php?login=success');
                 exit();

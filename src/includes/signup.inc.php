@@ -20,7 +20,7 @@ if (isset($_POST['submit'])) {
     $stmt = $conn->prepare($sql);
 
     if (!$stmt) {
-        header("Location: http://localhost/craiova-overflow/src/register.php?error=sqlError");
+        header("Location: http://localhost/craiova-overflow/register.php?error=sqlError");
         exit();
     } else {
         $stmt->bind_param("s", $username);
@@ -28,14 +28,14 @@ if (isset($_POST['submit'])) {
         $result = $stmt->get_result();
 
         if ($result->num_rows > 0) {
-            header("Location: http://localhost/craiova-overflow/src/register.php?error=usernameNotUnique");
+            header("Location: http://localhost/craiova-overflow/register.php?error=usernameNotUnique");
             exit();
         } else {
             $sql = "INSERT INTO users (username, email, password) VALUES (?, ?, ?)"; // ? placeholder for prepeared statements
             $stmt = $conn->prepare($sql);
 
             if (!$stmt) {
-                header("Location: http://localhost/craiova-overflow/src/register.php?error=sqlError");
+                header("Location: http://localhost/craiova-overflow/register.php?error=sqlError");
                 exit();
             } else {
                 $hashPwd = password_hash($password, PASSWORD_DEFAULT);
@@ -44,13 +44,13 @@ if (isset($_POST['submit'])) {
                 // mysqli_stmt_bind_param($stmt, "sss", $username, $email, $hashPwd); // replaces ? in the query
                 // mysqli_stmt_execute($stmt);
 
-                header("Location: http://localhost/craiova-overflow/src/register.php?success=registered");
+                header("Location: http://localhost/craiova-overflow/register.php?success=registered");
                 exit();
             }
         }
     }
     $stmt->close();
 } else {
-    header("Location: http://localhost/craiova-overflow/src/register.php");
+    header("Location: http://localhost/craiova-overflow/register.php");
     exit();
 }

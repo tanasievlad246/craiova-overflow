@@ -1,4 +1,4 @@
-textarea {
+form .resize {
   resize: none;
 }
 
@@ -8,4 +8,8 @@ textarea {
 
 body {
   background-color: lightgray;
+}
+
+#link {
+  color: red;
 }

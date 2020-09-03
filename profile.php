@@ -1,4 +1,4 @@
-<?php include 'header.php';
+<?php include './src/components/header.php';
 if (isset($_SESSION['username'])) {
 
     $username = $_SESSION['username'];
@@ -14,7 +14,7 @@ if (isset($_SESSION['username'])) {
     EOS;
     
 } else {
-    header("Location: http://localhost/craiova-overflow/src/register.php?error=You+to+be+logged+in");
+    header("Location: http://localhost/craiova-overflow/register.php?error=You+to+be+logged+in");
 }
 
-include 'footer.php';
+include './src/components/footer.php';

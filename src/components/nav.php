@@ -11,13 +11,13 @@
 				</div>
 				<button name='login' type="submit" class="btn btn-primary ml-2">Login</button>
 			</form>
-			<a name="Register" value="Register" class="btn btn-outline-success" href="src/register.php">Register</a>
+			<a name="Register" value="Register" class="btn btn-outline-success" href="register.php">Register</a>
 		<?php } else { ?>
 			<div class="float-left">
-				<form action="src/includes/logout.inc.php" class="float-left mr-2">
+				<form action="./src/includes/logout.inc.php" class="float-left mr-2">
 					<input type="submit" name="logout" value="Logout" class="btn btn-outline-success" />
 				</form>
-				<a href="src/components/profile.php" class="btn btn-outline-success">Profile</a>
+				<a href="profile.php" class="btn btn-outline-success">Profile</a>
 			</div>
 		<?php } ?>
 	</div>

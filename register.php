@@ -1,6 +1,6 @@
-<?php include 'components/header.php'; ?>
+<?php include './src/components/header.php'; ?>
 
-<form action="includes/signup.inc.php" method="post">
+<form action="./src/includes/signup.inc.php" method="post" class="form p-5 w-50 mx-auto">
 	<div class="form-group">
 		<label for="exampleInputEmail1">Email address</label>
 		<input name="email" type="email" class="form-control" id="exampleInputEmail1" required>
@@ -17,4 +17,4 @@
 </form>
 
 
-<?php include 'components/footer.php'; ?>
+<?php include './src/components/footer.php'; ?>

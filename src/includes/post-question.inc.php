@@ -16,10 +16,22 @@ if (isset($_POST['submit-question'])) {
         header("Location: http://localhost/craiova-overflow/components/post-question.php?error=SQL+Error");
         exit();
     } else {
+        try {
         $stmt->bind_param("sssi", $title, $body, $user, $user_id);
-        $stmt->execute();
+        try {
+            $stmt->execute();
+        } catch (Exception $e) {
+            $error = $e->getMessage();
+            echo $conn->error;
+            header("Location: http://localhost/craiova-overflow/components/post-question.php?error=SQL+Error");
+            exit();
+        }
         header("Location: http://localhost/craiova-overflow/index.php?success=Post+seuccessful");
         exit();
+        } catch (Exception $e) {
+            $error = $e->getMessage();
+            echo $conn->error;
+        }
     }
     $stmt->close();
 } else {

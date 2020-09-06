@@ -14,6 +14,6 @@
 	<title>Craiova Overflow</title>
 </head>
 
-<body>
+<body class="bg-light">
 	<div class="container-fluid p-0">
 		<?php include 'nav.php'; ?>

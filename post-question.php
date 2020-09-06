@@ -7,9 +7,9 @@
             <input type="text" class="form-control" name="title" placeholder="Title">
         </div>
         <div class="form-group">
-            <textarea class="form-control resize" name="text" placeholder="Message" rows="14"></textarea>
+            <textarea class="form-control" name="text" placeholder="Message" rows="14"></textarea>
         </div>
-        <div class="form-group justify-content-center">
+        <div class="form-group text-center">
             <button name="submit-question" class="btn btn-primary" type="submit">Ask Question</button>
         </div>
     </form>

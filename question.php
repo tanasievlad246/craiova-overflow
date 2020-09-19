@@ -2,6 +2,7 @@
 
 if (isset($_GET['qid'])) {
     include './src/includes/dbh.inc.php';
+    $user = new User();
 
     $sql = 'SELECT question_id, title, body, owner_user FROM questions WHERE question_id=?';
     if (isset($conn)) {
@@ -29,7 +30,7 @@ if (isset($_GET['qid'])) {
             <div class="row">
                 <div class="ml-4">
                     <h2><?= $question['title'] ?></h2>
-                    <small class="blockquote-footer">User: <?= $question['owner_user'] ?></small>
+                    <small class="blockquote-footer"><?= $question['owner_user'] ?></small>
                 </div>
             </div>
             <div class="row border-bottom border-dark mx-auto">
@@ -40,7 +41,7 @@ if (isset($_GET['qid'])) {
             <!-- Row for rendering answers -->
             <div>
                 <?php
-                $sql = "SELECT body, username, user_id, question_id FROM answers WHERE question_id=?";
+                $sql = "SELECT answer_id, body, username, user_id, question_id, likes, dislikes FROM answers WHERE question_id=?";
                 $stmt = $conn->prepare($sql);
 
                 if (!$stmt) {
@@ -56,6 +57,10 @@ if (isset($_GET['qid'])) {
                     <div class="p-2 border-bottom border-success">
                         <p><?= $row['body'] ?></p>
                         <small class="blockquote-footer"><?= $row['username'] ?></small>
+                        <!-- Check if the user liked the given answer -->
+                        <button <?php if ($user->userLiked($row['answer_id'])) : ?> class="btn btn-success" <?php else : ?> class="btn btn-main" <?php endif ?> name="like"><i class="fas fa-arrow-up"></i></button>
+                        <button class="btn btn-main" name="dislike"><i class="fas fa-arrow-down"></i></button>
+                        <p><?= $user->userLiked($row['answer_id']) ?></p>
                     </div>
                 <?php } ?>
             </div>

@@ -1,17 +1,6 @@
 <?php
 if (isset($_POST['login'])) {
     require 'dbh.inc.php';
-    // $host = '127.0.0.1';
-    // $port = '3306';
-    // $username = 'root';
-    // $password = 'fortuna246';
-    // $dbName = 'craiovaOverflow';
-
-    // $conn = new mysqli($host, $username, $password, $dbName);
-
-    // if (!$conn) {
-    //     die("Connection failed: " . mysqli_connect_error());
-    // }
 
     $email = $_POST['email'];
     $password = $_POST['password'];

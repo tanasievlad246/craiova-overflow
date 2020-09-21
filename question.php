@@ -1,8 +1,10 @@
 <?php include './src/components/header.php';
 
+
+
 if (isset($_GET['qid'])) {
     include './src/includes/dbh.inc.php';
-    $user = new User();
+    $user = new User($_SESSION['user_id']);
 
     $sql = 'SELECT question_id, title, body, owner_user FROM questions WHERE question_id=?';
     if (isset($conn)) {
@@ -41,7 +43,7 @@ if (isset($_GET['qid'])) {
             <!-- Row for rendering answers -->
             <div>
                 <?php
-                $sql = "SELECT answer_id, body, username, user_id, question_id, likes, dislikes FROM answers WHERE question_id=?";
+                $sql = "SELECT answer_id, body, username, user_id, question_id FROM answers WHERE question_id=?";
                 $stmt = $conn->prepare($sql);
 
                 if (!$stmt) {
@@ -58,9 +60,10 @@ if (isset($_GET['qid'])) {
                         <p><?= $row['body'] ?></p>
                         <small class="blockquote-footer"><?= $row['username'] ?></small>
                         <!-- Check if the user liked the given answer -->
-                        <button <?php if ($user->userLiked($row['answer_id'])) : ?> class="btn btn-success" <?php else : ?> class="btn btn-main" <?php endif ?> name="like"><i class="fas fa-arrow-up"></i></button>
-                        <button class="btn btn-main" name="dislike"><i class="fas fa-arrow-down"></i></button>
-                        <p><?= $user->userLiked($row['answer_id']) ?></p>
+                        <button <?php if ($user->userLiked($row['answer_id']) > 0) : ?> class="btn btn-success like-btn" name="unlike" <?php else : ?> class="btn btn-main like-btn" name="like" <?php endif ?> data-id="<?= $row['answer_id'] ?>"><i class="fas fa-arrow-up"></i></button>
+                        <button <?php if ($user->userDisliked($row['answer_id']) > 0) : ?> class="btn btn-danger dislike-btn" name="undislike" <?php else : ?> class="btn btn-main dislike-btn" name="dislike" <?php endif ?> data-id="<?= $row['answer_id'] ?>"><i class="fas fa-arrow-down"></i></button>
+                        <small><?php print $user->userLiked($row['answer_id']) ?></small>
+                        <small><?php print $user->userDisliked($row['answer_id']) ?></small>
                     </div>
                 <?php } ?>
             </div>

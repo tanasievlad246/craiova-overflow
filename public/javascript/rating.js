@@ -2,7 +2,7 @@ $(document).ready(function () {
     // Like button ajax
     $('.like-btn').on('click', function () {
         const answer_id = $(this).data('id');
-        $clickedBtn = $('.like-btn');
+        $clickedBtn = $(this);
         let action;
 
         if ($clickedBtn.hasClass('btn-main')) {
@@ -20,10 +20,11 @@ $(document).ready(function () {
             }
         }).done(function (data) {
             let res = JSON.parse(data);
-            console.log(res);
             if (action == 'like') {
                 $clickedBtn.removeClass('btn-main');
                 $clickedBtn.addClass('btn-success');
+                $clickedBtn.siblings().removeClass('btn-danger');
+                $clickedBtn.siblings().addClass('btn-main');
             } else if (action == 'unlike') {
                 $clickedBtn.removeClass('btn-success');
                 $clickedBtn.addClass('btn-main');
@@ -34,13 +35,13 @@ $(document).ready(function () {
     // dislike button ajax
     $('.dislike-btn').on('click', function () {
         const answer_id = $(this).data('id');
-        $clickedBtn = $('.dislike-btn');
+        $clickedBtn = $(this);
         let action;
 
         if ($clickedBtn.hasClass('btn-main')) {
             action = 'dislike';
         } else if ($clickedBtn.hasClass('btn-danger')) {
-            action = 'unlike';
+            action = 'undislike';
         }
 
         $.ajax({
@@ -52,10 +53,11 @@ $(document).ready(function () {
             }
         }).done(function (data) {
             let res = JSON.parse(data);
-            console.log(res);
             if (action == 'dislike') {
                 $clickedBtn.removeClass('btn-main');
                 $clickedBtn.addClass('btn-danger');
+                $clickedBtn.siblings().removeClass('btn-success');
+                $clickedBtn.siblings().addClass('btn-main');
             } else if (action == 'undislike') {
                 $clickedBtn.removeClass('btn-danger');
                 $clickedBtn.addClass('btn-main');

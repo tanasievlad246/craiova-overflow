@@ -60,10 +60,10 @@ if (isset($_GET['qid'])) {
                         <p><?= $row['body'] ?></p>
                         <small class="blockquote-footer"><?= $row['username'] ?></small>
                         <!-- Check if the user liked the given answer -->
-                        <button <?php if ($user->userLiked($row['answer_id']) > 0) : ?> class="btn btn-success like-btn" name="unlike" <?php else : ?> class="btn btn-main like-btn" name="like" <?php endif ?> data-id="<?= $row['answer_id'] ?>"><i class="fas fa-arrow-up"></i></button>
-                        <button <?php if ($user->userDisliked($row['answer_id']) > 0) : ?> class="btn btn-danger dislike-btn" name="undislike" <?php else : ?> class="btn btn-main dislike-btn" name="dislike" <?php endif ?> data-id="<?= $row['answer_id'] ?>"><i class="fas fa-arrow-down"></i></button>
-                        <small><?php print $user->userLiked($row['answer_id']) ?></small>
-                        <small><?php print $user->userDisliked($row['answer_id']) ?></small>
+                        <div class="rating-div">
+                            <button <?php if ($user->userLiked($row['answer_id']) > 0) : ?> class="btn btn-success like-btn" name="unlike" <?php else : ?> class="btn btn-main like-btn" name="like" <?php endif ?> data-id="<?= $row['answer_id'] ?>"><i class="fas fa-arrow-up"></i></button>
+                            <button <?php if ($user->userDisliked($row['answer_id']) > 0) : ?> class="btn btn-danger dislike-btn" name="undislike" <?php else : ?> class="btn btn-main dislike-btn" name="dislike" <?php endif ?> data-id="<?= $row['answer_id'] ?>"><i class="fas fa-arrow-down"></i></button>
+                        </div>
                     </div>
                 <?php } ?>
             </div>

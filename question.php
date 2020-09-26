@@ -63,6 +63,22 @@ if (isset($_GET['qid'])) {
                         <div class="rating-div">
                             <button <?php if ($user->userLiked($row['answer_id']) > 0) : ?> class="btn btn-success like-btn" name="unlike" <?php else : ?> class="btn btn-main like-btn" name="like" <?php endif ?> data-id="<?= $row['answer_id'] ?>"><i class="fas fa-arrow-up"></i></button>
                             <button <?php if ($user->userDisliked($row['answer_id']) > 0) : ?> class="btn btn-danger dislike-btn" name="undislike" <?php else : ?> class="btn btn-main dislike-btn" name="dislike" <?php endif ?> data-id="<?= $row['answer_id'] ?>"><i class="fas fa-arrow-down"></i></button>
+                            <?php
+                            $sql = "SELECT COUNT(rating_action) FROM rating_info WHERE answer_id=? AND rating_action='like'";
+                            $aId = $row['answer_id'];
+                            $stmt = $conn->prepare($sql);
+                            $stmt->bind_param('i', $aId);
+                            $stmt->execute();
+                            $likes = $stmt->get_result()->fetch_assoc();
+                            $sql = "SELECT COUNT(rating_action) FROM rating_info WHERE answer_id=? AND rating_action='dislike'";
+                            $stmt = $conn->prepare($sql);
+                            $stmt->bind_param('i', $aId);
+                            $stmt->execute();
+                            $dislikes = $stmt->get_result()->fetch_assoc();
+                            $rating = $likes["COUNT(rating_action)"] - $dislikes["COUNT(rating_action)"];
+                            ?>
+                            <!-- likes result ["COUNT(answer_id)"]=> int(0) -->
+                            <small><?php print $rating ?></small>
                         </div>
                     </div>
                 <?php } ?>

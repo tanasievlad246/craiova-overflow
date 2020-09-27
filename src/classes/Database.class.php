@@ -18,12 +18,11 @@ class Database
         $this->dbName = $_ENV['DB_NAME'];
     }
 
-    public function connect(): mysqli
+    public function connect(): PDO
     {
-        $conn = new mysqli($this->servername, $this->username, $this->password, $this->dbName);
-        if ($conn->connect_error) {
-            die("Connection failed: " . $conn->connect_error);
-        }
-        return $conn;
+        $connData = "mysql:host=$this->servername;dbname=$this->dbName";
+        $pdo = new PDO($connData, $this->username, $this->password);
+        $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
+        return $pdo;
     }
 }

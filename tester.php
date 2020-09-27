@@ -3,15 +3,11 @@ include './src/components/header.php';
 
 $db = new Database();
 
-$sql = "SELECT * FROM questions";
-$stmt = $db->connect();
-$stmt->prepare($sql);
-// if (!$stmt) {
-//     echo "Error";
-// } else {
-//     $stmt->execute();
-//     $result = $stmt->get_result()->fetch_assoc();
-//     echo $result;
-// }
+$sql = "SELECT title FROM questions";
+$stmt = $db->connect()->prepare($sql);
+$stmt->execute();
+$titles = $stmt->fetchAll();
 
-echo __DIR__;
+foreach ($titles as $title) {
+    print $title['title'] . "<br />";
+}

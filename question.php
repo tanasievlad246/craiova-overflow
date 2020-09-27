@@ -4,8 +4,9 @@
 
 if (isset($_GET['qid'])) {
     include './src/includes/dbh.inc.php';
-    $user = new User($_SESSION['user_id']);
-
+    if (isset($_SESSION['user_id'])) {
+        $user = new User($_SESSION['user_id']);
+    }
     $sql = 'SELECT question_id, title, body, owner_user FROM questions WHERE question_id=?';
     if (isset($conn)) {
         $stmt = $conn->prepare($sql);
@@ -77,9 +78,11 @@ if (isset($_GET['qid'])) {
                             $dislikes = $stmt->get_result()->fetch_assoc();
                             $rating = $likes["COUNT(rating_action)"] - $dislikes["COUNT(rating_action)"];
                             ?>
-                            <!-- likes result ["COUNT(answer_id)"]=> int(0) -->
-                            <small><?php print $rating ?></small>
+                            <!-- Shows the rating of a answer that is likes minus dislikes -->
+                            <small class="rating"><?php print $rating ?></small>
                         </div>
+
+
                     </div>
                 <?php } ?>
             </div>

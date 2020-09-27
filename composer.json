@@ -1,5 +1,8 @@
 {
-    "name": "vlad246/craiova-overflow",
-    "type": "project",
-    "require": {}
+  "description": "An app to ask questions",
+  "name": "vlad246/craiova-overflow",
+  "type": "project",
+  "require": {
+    "vlucas/phpdotenv": "^5.2"
+  }
 }

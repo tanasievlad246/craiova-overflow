@@ -1,19 +1,21 @@
 <?php
 
 declare(strict_types=1);
+require './src/includes/env.inc.php';
+
 class Database
 {
-    private string $servername;
-    private string $username;
-    private string $password;
-    private string $dbName;
+    private $servername;
+    private $username;
+    private $password;
+    private $dbName;
 
-    public function __construct(string $servername, string $username, string $password, string $dbName)
+    public function __construct()
     {
-        $this->servername = $servername;
-        $this->username = $username;
-        $this->password = $password;
-        $this->dbName = $dbName;
+        $this->servername = $_ENV['DB_SERVERNAME'];
+        $this->username = $_ENV['DB_USERNAME'];
+        $this->password = $_ENV['DB_PASSWORD'];
+        $this->dbName = $_ENV['DB_NAME'];
     }
 
     public function connect(): mysqli

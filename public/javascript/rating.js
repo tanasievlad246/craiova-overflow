@@ -4,6 +4,7 @@ $(document).ready(function () {
         const answer_id = $(this).data('id');
         $clickedBtn = $(this);
         let action;
+        let rating = $('.rating').val();
 
         if ($clickedBtn.hasClass('btn-main')) {
             action = 'like';

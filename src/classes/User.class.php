@@ -1,14 +1,13 @@
 <?php
 
 declare(strict_types=1);
-
+include 'Database.class.php';
 class User
 {
 
     private $username;
     private $password;
     private $email;
-    private $db;
 
     public function __construct($username, $password, $email)
     {
@@ -68,32 +67,37 @@ class User
         return $stmt->fetchAll();
     }
 
-    public function register(): bool
+    private function checkIfUserAlreadyExists()
     {
         $db = new Database();
         $sql = "SELECT username FROM users WHERE username=?";
-
         $stmt = $db->connect()->prepare($sql);
         if (!$stmt) {
             return false;
         } else {
             $stmt->execute([$this->username]);
             $result = $stmt->fetchAll();
+            return count($result);
+        }
+        return false;
+    }
 
-            if (count($result) > 0) {
-                $sql = "INSERT INTO users (username, email, password) VALUES (?, ?, ?)";
-                $stmt = $db->connect()->prepare($sql);
+    public function register()
+    {
+        if ($this->checkIfUserAlreadyExists() == 0) {
+            $db = new Database();
+            $sql = "INSERT INTO users (username, email, password) VALUES (?, ?, ?)";
+            $stmt = $db->connect()->prepare($sql);
 
-                if (!$stmt) {
-                    return false;
-                } else {
-                    $hashPwd = password_hash($this->password, PASSWORD_DEFAULT);
-                    $stmt->execute([$this->username, $this->email, $hashPwd]);
-                    return true;
-                }
+            if (!$stmt) {
+                return "SQL+Error+at+prepare";
             } else {
-                return false;
+                $hashPwd = password_hash($this->password, PASSWORD_DEFAULT); //password_hash($password, PASSWORD_DEFAULT)
+                $stmt->execute([$this->username, $this->email, $hashPwd]);
+                return true;
             }
+        } else {
+            return false;
         }
     }
 

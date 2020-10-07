@@ -1,7 +1,7 @@
 <?php
 
 declare(strict_types=1);
-require './src/includes/env.inc.php';
+require $_SERVER['DOCUMENT_ROOT'] . '/craiova-overflow/src/includes/env.inc.php';
 
 class Database
 {
@@ -21,7 +21,7 @@ class Database
     public function connect(): PDO
     {
         $connData = "mysql:host=$this->servername;dbname=$this->dbName";
-        $pdo = new PDO($connData, $this->username, $this->password);
+        $pdo = new PDO($connData, $this->username, $this->password, array(PDO::ATTR_ERRMODE => PDO::ERRMODE_WARNING));
         $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
         return $pdo;
     }

@@ -4,9 +4,6 @@
 
 if (isset($_GET['qid'])) {
     include './src/includes/dbh.inc.php';
-    if (isset($_SESSION['user_id'])) {
-        $user = new User($_SESSION['user_id']);
-    }
     $sql = 'SELECT question_id, title, body, owner_user FROM questions WHERE question_id=?';
     if (isset($conn)) {
         $stmt = $conn->prepare($sql);
@@ -62,8 +59,8 @@ if (isset($_GET['qid'])) {
                         <small class="blockquote-footer"><?= $row['username'] ?></small>
                         <!-- Check if the user liked the given answer -->
                         <div class="rating-div">
-                            <button <?php if ($user->userLiked($row['answer_id']) > 0) : ?> class="btn btn-success like-btn" name="unlike" <?php else : ?> class="btn btn-main like-btn" name="like" <?php endif ?> data-id="<?= $row['answer_id'] ?>"><i class="fas fa-arrow-up"></i></button>
-                            <button <?php if ($user->userDisliked($row['answer_id']) > 0) : ?> class="btn btn-danger dislike-btn" name="undislike" <?php else : ?> class="btn btn-main dislike-btn" name="dislike" <?php endif ?> data-id="<?= $row['answer_id'] ?>"><i class="fas fa-arrow-down"></i></button>
+                            <button <?php if (User::userLiked($row['answer_id'], $_SESSION['user_id']) > 0) : ?> class="btn btn-success like-btn" name="unlike" <?php else : ?> class="btn btn-main like-btn" name="like" <?php endif ?> data-id="<?= $row['answer_id'] ?>"><i class="fas fa-arrow-up"></i></button>
+                            <button <?php if (User::userDisliked($row['answer_id'], $_SESSION['user_id']) > 0) : ?> class="btn btn-danger dislike-btn" name="undislike" <?php else : ?> class="btn btn-main dislike-btn" name="dislike" <?php endif ?> data-id="<?= $row['answer_id'] ?>"><i class="fas fa-arrow-down"></i></button>
                             <?php
                             $sql = "SELECT COUNT(rating_action) FROM rating_info WHERE answer_id=? AND rating_action='like'";
                             $aId = $row['answer_id'];

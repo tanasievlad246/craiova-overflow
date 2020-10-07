@@ -25,7 +25,7 @@ class User
         $stmt = $db->connect()->prepare($sql);
 
         if (!$stmt) {
-            return "ERROR IN SQL";
+            return false;
         } else {
             $stmt->execute([$user_id, $answer_id, 'like']);
             $result = $stmt->fetchAll();
@@ -46,7 +46,7 @@ class User
         $stmt = $db->connect()->prepare($sql);
 
         if (!$stmt) {
-            return "ERROR IN SQL";
+            return false;
         } else {
             $stmt->execute([$user_id, $answer_id, 'dislike']);
             $result = $stmt->fetchAll();
@@ -75,7 +75,7 @@ class User
 
         $stmt = $db->connect()->prepare($sql);
         if (!$stmt) {
-            return "SQL Error";
+            return false;
         } else {
             $stmt->execute([$this->username]);
             $result = $stmt->fetchAll();
@@ -85,14 +85,14 @@ class User
                 $stmt = $db->connect()->prepare($sql);
 
                 if (!$stmt) {
-                    return "SQL Error";
+                    return false;
                 } else {
                     $hashPwd = password_hash($this->password, PASSWORD_DEFAULT);
                     $stmt->execute([$this->username, $this->email, $hashPwd]);
                     return true;
                 }
             } else {
-                return "Username not unique";
+                return false;
             }
         }
     }

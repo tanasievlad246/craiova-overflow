@@ -24,7 +24,7 @@ class Question
         $db = new Database();
         $sql = "SELECT question_id, title, date FROM questions ORDER BY date desc";
         $stmt = $db->connect()->prepare($sql);
-        $stmt->execute();
+        $result = $stmt->execute();
 
         if (!$stmt) {
             return [
@@ -32,7 +32,7 @@ class Question
             ];
         }
 
-        return $stmt->fetchAll();
+        return $result->fetchAll();
     }
 
     public function askQuestion(): bool
@@ -58,8 +58,14 @@ class Question
         $sql = "SELECT * FROM questions WHERE question_id=?";
         $stmt = $db->connect()->prepare($sql);
 
-        if (!$stmt) return [];
-        $result = $stmt->execute([$qid]);
-        return $result->fetch();
+        if (!$stmt) return ["error" => "SQL error"];
+        ;
+
+        $stmt->execute([$qid]);
+
+        if ($stmt->rowCount() <= 0) {
+            return ["error" => "Question not found"];
+        }
+        return $stmt->fetch();
     }
 }

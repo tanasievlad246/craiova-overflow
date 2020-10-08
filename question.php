@@ -1,7 +1,5 @@
 <?php include './src/components/header.php';
 
-
-
 if (isset($_GET['qid'])) {
     include './src/includes/dbh.inc.php';
     $sql = 'SELECT question_id, title, body, owner_user FROM questions WHERE question_id=?';

@@ -20,10 +20,20 @@ class Answer
 
     public static function getAllAnswersForQuestion(int $qid): array
     {
-        return [];
+        $db = new Database();
+        $sql = "SELECT answer_id, body, username, user_id, question_id FROM answers WHERE question_id=?";
+        $stmt = $db->connect()->prepare($sql);
+        if (!$stmt) {
+            return ["error" => "SQL error"];
+        }
+        $stmt->execute([$qid]);
+        if ($stmt->rowCount() <= 0) {
+            return [];
+        }
+        return $stmt->fetch();
     }
 
-    public function postAnswerToQuestion(): bool
+    public function postAnswerToQuestion(int $qid): bool
     {
         return false;
     }
@@ -33,12 +43,12 @@ class Answer
         return 0;
     }
 
-    public static function upAnswer(): bool
+    public static function upAnswer(int $aid): bool
     {
         return false;
     }
 
-    public static function downAnswer(): bool
+    public static function downAnswer(int $aid): bool
     {
         return false;
     }

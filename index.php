@@ -1,4 +1,7 @@
-<?php include './src/components/header.php'; ?>
+<?php
+include './src/components/header.php';
+include './src/classes/Question.class.php';
+?>
 
 
 <div class="m-auto w-75 ">
@@ -8,27 +11,15 @@
     <div class="row justify-content-center border-dark">
         <table class="table table-striped table-bordered text-center">
             <?php
-            include 'src/includes/dbh.inc.php';
+            $questions = Question::getAllQuestions();
 
-            $sql = "SELECT question_id, title, date FROM questions ORDER BY date desc";
-            if (isset($conn)) {
-                $stmt = $conn->prepare($sql);
-            }
-
-            if (!$stmt) {
-                print "<h3>Error connecting to the database</h3>";
-            } else {
-                $stmt->execute();
-                $result = $stmt->get_result();
-
-                while ($row = $result->fetch_assoc()) {
-                    print <<< EOS
-                        <tr>
-                            <td class="w-75"><a href="question.php?qid={$row['question_id']}" class="lead text-dark nav-link p-0 font-weight-bold">{$row["title"]}</a></td>
-                            <td class="font-weight-bold">{$row["date"]}</td>
-                        </tr>
-                    EOS;
-                }
+            foreach ($questions as $row) {
+                print <<< EOS
+                         <tr>
+                             <td class="w-75"><a href="question.php?qid={$row['question_id']}" class="lead text-dark nav-link p-0 font-weight-bold">{$row["title"]}</a></td>
+                             <td class="font-weight-bold">{$row["date"]}</td>
+                         </tr>
+                     EOS;
             }
             ?>
         </table>

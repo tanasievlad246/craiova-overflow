@@ -1,4 +1,8 @@
 <?php
 include './src/components/header.php';
 
-echo $_SERVER['DOCUMENT_ROOT'] . "/craiova-overflow";
+$questions = Question::getAllQuestions();
+
+foreach ($questions as $arr) {
+    echo "<h2>" . $arr['title'] . "</h2>";
+}

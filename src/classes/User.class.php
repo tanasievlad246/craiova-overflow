@@ -103,11 +103,40 @@ class User
 
     public static function logOut(): bool
     {
+        session_start();
+        session_unset();
+        session_destroy();
         return true;
     }
 
-    public static function login(): bool
+    public static function login(string $email, string $password): bool
     {
-        return true;
+        $db = new Database();
+        $sql = "SELECT * FROM users WHERE email=?";
+        $stmt = $db->connect()->prepare($sql);
+
+        if (!$stmt) {
+            return false;
+        } else {
+            $stmt->execute([$email]);
+            $result = $stmt->fetch();
+
+            if ($result) {
+                $passwordCheck = password_verify($password, $result['password']);
+                if ($passwordCheck == false) {
+                    return false;
+                } else if ($passwordCheck == true) {
+                    session_start();
+                    $_SESSION['user_id'] = $result['user_id'];
+                    $_SESSION['email'] = $result['email'];
+                    $_SESSION['username'] = $result['username'];
+                    $_SESSION['joined'] = $result['joined'];
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+        }
+        return false;
     }
 }

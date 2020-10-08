@@ -1,7 +1,7 @@
 <?php
 
 declare(strict_types=1);
-include 'Database.class.php';
+include_once('Database.class.php');
 class User
 {
 

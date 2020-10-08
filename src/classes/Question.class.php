@@ -1,7 +1,7 @@
 <?php
 
 declare(strict_types=1);
-require 'Database.class.php';
+include_once('Database.class.php');
 
 class Question
 {
@@ -32,7 +32,7 @@ class Question
             ];
         }
 
-        return $result->fetchAll();
+        return $stmt->fetchAll();
     }
 
     public function askQuestion(): bool
@@ -59,7 +59,6 @@ class Question
         $stmt = $db->connect()->prepare($sql);
 
         if (!$stmt) return ["error" => "SQL error"];
-        ;
 
         $stmt->execute([$qid]);
 
@@ -67,5 +66,14 @@ class Question
             return ["error" => "Question not found"];
         }
         return $stmt->fetch();
+    }
+
+
+    /*
+     *TODO implement update on the backend and buttons on the front end, the form must be the same with post question form
+     * */
+    public static function updateQuestion(int $qid, string $title, string $body): bool
+    {
+        return false;
     }
 }

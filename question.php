@@ -1,21 +1,10 @@
 <?php include './src/components/header.php';
 
 if (isset($_GET['qid'])) {
-    include './src/includes/dbh.inc.php';
-    $sql = 'SELECT question_id, title, body, owner_user FROM questions WHERE question_id=?';
-    if (isset($conn)) {
-        $stmt = $conn->prepare($sql);
-    }
 
-    if (!$stmt) {
-        header("Location: http://localhost/go-ask/question.php?error=SQL+Error");
-        exit();
-    } else {
-        $stmt->bind_param("i", $_GET['qid']);
-        $stmt->execute();
-        $question = $stmt->get_result()->fetch_assoc();
-    }
+    $question = Question::getQuestion($_GET['qid']);
 }
+
 ?>
 
 <div>
@@ -39,18 +28,9 @@ if (isset($_GET['qid'])) {
             <!-- Row for rendering answers -->
             <div>
                 <?php
-                $sql = "SELECT answer_id, body, username, user_id, question_id FROM answers WHERE question_id=?";
-                $stmt = $conn->prepare($sql);
 
-                if (!$stmt) {
-                    header("Location: http://localhost/go-ask/question.php?error=SQL+Error");
-                    exit();
-                } else {
-                    $stmt->bind_param("i", $_GET['qid']);
-                    $stmt->execute();
-                    $result = $stmt->get_result();
-                }
-                while ($row = $result->fetch_assoc()) {
+                $answers = Answer::getAllAnswersForQuestion($_GET['qid']);
+                foreach ($answers as $row) {
                 ?>
                     <div class="p-2 border-bottom border-success">
                         <p><?= $row['body'] ?></p>
@@ -65,18 +45,9 @@ if (isset($_GET['qid'])) {
                                 <button class="btn btn-main dislike-btn"><i class="fas fa-arrow-down"></i></button>
                             <?php endif; ?>
                             <?php
-                            $sql = "SELECT COUNT(rating_action) FROM rating_info WHERE answer_id=? AND rating_action='like'";
-                            $aId = $row['answer_id'];
-                            $stmt = $conn->prepare($sql);
-                            $stmt->bind_param('i', $aId);
-                            $stmt->execute();
-                            $likes = $stmt->get_result()->fetch_assoc();
-                            $sql = "SELECT COUNT(rating_action) FROM rating_info WHERE answer_id=? AND rating_action='dislike'";
-                            $stmt = $conn->prepare($sql);
-                            $stmt->bind_param('i', $aId);
-                            $stmt->execute();
-                            $dislikes = $stmt->get_result()->fetch_assoc();
-                            $rating = $likes["COUNT(rating_action)"] - $dislikes["COUNT(rating_action)"];
+
+                            $rating = Answer::getRating($row['answer_id']);
+
                             ?>
                             <!-- Shows the rating of a answer that is likes minus dislikes -->
                             <small class="rating"><?php print $rating ?></small>

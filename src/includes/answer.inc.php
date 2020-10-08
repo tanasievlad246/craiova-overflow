@@ -15,16 +15,16 @@ if (isset($_POST['answer-submit'])) {
     }
 
     if (!$stmt) {
-        header("Location: http://localhost/craiova-overflow/question.php?qid={$question_id}&error=SQL+Error");
+        header("Location: ../../question.php?qid={$question_id}&error=SQL+Error");
         exit();
     } else {
         $stmt->bind_param("ssii", $body, $user, $user_id, $question_id);
         $stmt->execute();
-        header("Location: http://localhost/craiova-overflow/question.php?qid={$question_id}&message=Answered+with+success");
+        header("Location: ../../question.php?qid={$question_id}&message=Answered+with+success");
         exit();
     }
     $stmt->close();
 } else {
-    header("Location: http://localhost/craiova-overflow/register.php?message=Register+before+sending+an+answer");
+    header("Location: ../../register.php?message=Register+before+sending+an+answer");
     exit();
 }

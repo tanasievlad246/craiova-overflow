@@ -1,7 +1,7 @@
 <?php
 
 declare(strict_types=1);
-require $_SERVER['DOCUMENT_ROOT'] . '/craiova-overflow/src/includes/env.inc.php';
+require $_SERVER['DOCUMENT_ROOT'] . '/go-ask/src/includes/env.inc.php';
 
 class Database
 {

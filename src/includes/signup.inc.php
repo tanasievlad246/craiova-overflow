@@ -9,13 +9,13 @@ if (isset($_POST['submit'])) {
     $user = new User($username, $password, $email);
 
     if ($user->register() == true) {
-        header("Location: http://localhost/craiova-overflow/index.php?message=Register+successful");
+        header("Location: ../../index.php?message=Register+successful");
         exit();
     } else {
-        header("Location: http://localhost/craiova-overflow/index.php?error=" . $user->register());
+        header("Location: ../../index.php?error=" . $user->register());
         exit();
     }
 } else {
-    header("Location: http://localhost/craiova-overflow/register.php");
+    header("Location: ../../register.php");
     exit();
 }

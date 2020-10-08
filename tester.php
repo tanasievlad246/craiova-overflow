@@ -1,8 +1,6 @@
 <?php
 include './src/components/header.php';
 
-$questions = Question::getAllQuestions();
+$question = Question::getQuestion(5);
 
-foreach ($questions as $arr) {
-    echo "<h2>" . $arr['title'] . "</h2>";
-}
+echo var_dump($question);

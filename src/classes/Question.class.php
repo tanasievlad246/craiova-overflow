@@ -32,8 +32,7 @@ class Question
             ];
         }
 
-        $result = $stmt->fetchAll();
-        return $result;
+        return $stmt->fetchAll();
     }
 
     public function askQuestion(): bool
@@ -58,7 +57,9 @@ class Question
         $db = new Database();
         $sql = "SELECT * FROM questions WHERE question_id=?";
         $stmt = $db->connect()->prepare($sql);
-        $stmt->execute([$qid]);
-        return [];
+
+        if (!$stmt) return [];
+        $result = $stmt->execute([$qid]);
+        return $result->fetch();
     }
 }

@@ -1,5 +1,5 @@
 <nav class="navbar navbar-dark bg-dark">
-	<a class="navbar-brand" href="/craiova-overflow/index.php">GoAsk</a>
+	<a class="navbar-brand" href="/go-ask/index.php">GoAsk</a>
 	<div>
 		<?php if (!isset($_SESSION['username'])) { ?>
 			<form action="src/includes/login.inc.php" method="POST" class="form-inline float-left mr-2">

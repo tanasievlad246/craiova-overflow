@@ -9,10 +9,10 @@ if (isset($_POST['login'])) {
     $login = User::login($email, $password);
 
     if ($login) {
-        header('Location: http://localhost/craiova-overflow/index.php?message=Login+successful');
+        header('Location: ../../index.php?message=Login+successful');
         exit();
     } else {
-        header('Location: http://localhost/craiova-overflow/login.php?error=Wrong+username+or+password');
+        header('Location: ../../login.php?error=Wrong+username+or+password');
         exit();
     }
 }

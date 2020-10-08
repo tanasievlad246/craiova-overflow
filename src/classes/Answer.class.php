@@ -10,8 +10,12 @@ class Answer
     private $owner_id;
     private $question_id;
 
-    public function __construct()
+    public function __construct($body, $user_owner, $owner_id, $question_id)
     {
+        $this->body = $body;
+        $this->user_owner = $user_owner;
+        $this->owner_id = $owner_id;
+        $this->question_id = $question_id;
     }
 
     public static function getAllAnswersForQuestion(int $qid): array

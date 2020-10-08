@@ -28,7 +28,7 @@ if (isset($_POST['action'])) {
     $stmt = $conn->prepare($sql);
 
     if (!$stmt) {
-        header("Location: http://localhost/craiova-overflow/error.php?error=SQL+Error");
+        header("Location: ../../error.php?error=SQL+Error");
         exit();
     } else {
         switch ($action) {
@@ -54,7 +54,7 @@ if (isset($_POST['action'])) {
     }
 
     $stmt->close();
-    echo json_encode(["message" => "works!"]);
+    echo json_encode(["message" => "rate successful!"]);
 } else {
-    header("Location: /index.php");
+    header("Location: ../../index.php");
 }

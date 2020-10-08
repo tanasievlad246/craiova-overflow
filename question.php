@@ -10,7 +10,7 @@ if (isset($_GET['qid'])) {
     }
 
     if (!$stmt) {
-        header("Location: http://localhost/craiova-overflow/question.php?error=SQL+Error");
+        header("Location: http://localhost/go-ask/question.php?error=SQL+Error");
         exit();
     } else {
         $stmt->bind_param("i", $_GET['qid']);
@@ -45,7 +45,7 @@ if (isset($_GET['qid'])) {
                 $stmt = $conn->prepare($sql);
 
                 if (!$stmt) {
-                    header("Location: http://localhost/craiova-overflow/question.php?error=SQL+Error");
+                    header("Location: http://localhost/go-ask/question.php?error=SQL+Error");
                     exit();
                 } else {
                     $stmt->bind_param("i", $_GET['qid']);

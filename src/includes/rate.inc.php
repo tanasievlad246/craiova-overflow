@@ -7,7 +7,8 @@ if (isset($_POST['action'])) {
     $action = $_POST['action'];
 
     Answer::rateAnswer($answerId, $userId, $action);
-    echo json_encode(["message" => "rate successful!"]);
+    $rating = Answer::getRating($answerId);
+    echo json_encode(["rating" => $rating]);
 } else {
     header("Location: ../../index.php");
 }

@@ -3,6 +3,7 @@
   "name": "vlad246/craiova-overflow",
   "type": "project",
   "require": {
-    "vlucas/phpdotenv": "^5.2"
+    "vlucas/phpdotenv": "^5.2",
+    "ext-json": "*"
   }
 }

@@ -74,5 +74,6 @@ if (isset($_GET['qid'])) {
         </div>
     <?php endif; ?>
 </div>
-
+<!--<script src="public/javascript/rating.js"></script>-->
 <?php include './src/components/footer.php'; ?>
+

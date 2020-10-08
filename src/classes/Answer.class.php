@@ -1,4 +1,4 @@
-<?php
+<?php /** @noinspection PhpUndefinedVariableInspection */
 
 declare(strict_types=1);
 include_once('Database.class.php');

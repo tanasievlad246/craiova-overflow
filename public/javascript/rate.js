@@ -1,10 +1,11 @@
 $(document).ready(function () {
+    let rating = $('.rating');
     // Like button ajax
     $('.like-btn').on('click', function () {
         const answer_id = $(this).data('id');
         $clickedBtn = $(this);
         let action;
-        let rating = $('.rating').val();
+
 
         if ($clickedBtn.hasClass('btn-main')) {
             action = 'like';
@@ -20,15 +21,18 @@ $(document).ready(function () {
                 'answer_id': answer_id
             }
         }).done(function (data) {
-            let res = JSON.parse(data);
-            if (action == 'like') {
+            res = JSON.parse(data);
+            console.log(res)
+            if (action === 'like') {
                 $clickedBtn.removeClass('btn-main');
                 $clickedBtn.addClass('btn-success');
                 $clickedBtn.siblings().removeClass('btn-danger');
                 $clickedBtn.siblings().addClass('btn-main');
-            } else if (action == 'unlike') {
+                rating.html(res.rating);
+            } else if (action === 'unlike') {
                 $clickedBtn.removeClass('btn-success');
                 $clickedBtn.addClass('btn-main');
+                rating.html(res.rating);
             }
         })
     })
@@ -53,16 +57,19 @@ $(document).ready(function () {
                 'answer_id': answer_id
             }
         }).done(function (data) {
-            let res = JSON.parse(data);
-            if (action == 'dislike') {
+            res = JSON.parse(data);
+            if (action === 'dislike') {
                 $clickedBtn.removeClass('btn-main');
                 $clickedBtn.addClass('btn-danger');
                 $clickedBtn.siblings().removeClass('btn-success');
                 $clickedBtn.siblings().addClass('btn-main');
-            } else if (action == 'undislike') {
+                rating.html(res.rating);
+            } else if (action === 'undislike') {
                 $clickedBtn.removeClass('btn-danger');
                 $clickedBtn.addClass('btn-main');
+                rating.html(res.rating);
             }
+
         })
     })
 })

@@ -1,6 +1,5 @@
 <?php
 if (isset($_POST['login'])) {
-    require 'dbh.inc.php';
     require '../classes/User.class.php';
 
     $email = $_POST['email'];

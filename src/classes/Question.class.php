@@ -74,6 +74,10 @@ class Question
      * */
     public static function updateQuestion(int $qid, string $title, string $body): bool
     {
-        return false;
+        $db = new Database();
+        $sql = "UPDATE questions SET title=?, body=? WHERE question_id= ?";
+        $stmt = $db->connect()->prepare($sql);
+        if (!$stmt) return false;
+        return  $stmt->execute([$title, $body, $qid]);
     }
 }

@@ -16,6 +16,11 @@ if (isset($_GET['qid'])) {
         <div class="p-5 w-50 mx-auto">
             <div class="row">
                 <div class="ml-4">
+                    <?php if (isset($_SESSION['user_id'])): ?>
+                        <?php if ($_SESSION['user_id'] == $question['user_id']): ?>
+                            <a class="btn btn-primary" href="./edit-question.php?qid=<?=$_GET['qid']?>">Edit</a>
+                        <?php endif; ?>
+                    <?php endif; ?>
                     <h2><?= $question['title'] ?></h2>
                     <small class="blockquote-footer"><?= $question['owner_user'] ?></small>
                 </div>

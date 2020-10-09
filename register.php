@@ -1,6 +1,6 @@
 <?php include './src/components/header.php'; ?>
 
-<form action="./src/includes/signup.inc.php" method="post" class="form p-5 w-50 mx-auto">
+<form action="./src/includes/signup.inc.php" method="post" class="form p-5 w-50 mx-auto register-form">
 	<div class="form-group">
 		<label for="exampleInputEmail1">Email address</label>
 		<input name="email" type="email" class="form-control" id="exampleInputEmail1" required>

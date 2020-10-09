@@ -13,7 +13,7 @@ if (isset($_GET['qid'])) {
             <h1>Question not found</h1>
         </div>
     <?php else : ?>
-        <div class="p-5 w-50 mx-auto">
+        <div class="p-5 w-50 mx-auto question-content">
             <div class="row">
                 <div class="ml-4">
                     <?php if (isset($_SESSION['user_id'])): ?>
